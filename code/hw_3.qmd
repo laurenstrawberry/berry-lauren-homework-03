@@ -79,26 +79,22 @@ drought_exp_clean <- drought_exp_clean %>%
 ggplot(drought_exp_clean, aes(x = water_treatment, y = total_g)) + # choose data
   geom_jitter(aes(color = water_treatment), alpha = 0.4) +  # More transparent underlying data
   geom_line(aes(y = predicted_total_g, group = 1, color = water_treatment), size = 1) +  # Model predictions
-  scale_color_manual(values = c("Well watered" = "darkturquoise", "Drought stressed" = "coral1")) +  # Custom colors
+  scale_color_manual(values = c("Well watered" = "aquamarine3", "Drought stressed" = "chocolate1")) +  # Custom colors
   facet_wrap(~ species_name) +  # Facet by species
   theme_minimal() + # simple theme
   theme(legend.position = "none") +  # Remove legend
-  labs(x = "Water Treatment", y = "Total Biomass Growth (g)", title = "Model Predictions by Species and Water Treatment") +
-  theme(strip.text = element_text(size = 10), # Adjust facet labels
-        plot.title = element_text(hjust = 0.5))  # center the title
+  labs(x = "Water Treatment", y = "Total Biomass Growth (g)") +
+  theme(strip.text = element_text(size = 10)) # Adjust facet labels
 
 ```
 
 ## d. Write a caption for your visualization. (6 points)
-Include a data citation.
+Figure 1: Model Predictions by Species and Water Treatment.
+Data from Valliere, Justin; Zhang, Jacqueline; Sharifi, M.; Rundel, Philip (2019). Data from: Can we condition native plants to increase drought tolerance and improve restoration success? [Dataset]. Dryad. https://doi.org/10.5061/dryad.v0861f7
+Points represent biomass (g), of different plant species on separate graphs. Colors represent the water treatment (drought stressed = organge, well watered = blue) these plants experienced. 
 
 ## e. Write a 3-4 sentence results section. (10 points)
-Your answer should be in paragraph form and address the following points:
-
-what predictors “best” described total mass (include model statistics here)?
-on average, what differences did you find between water treatments?
-on average, what differences did you find between species?
-
+The best predictors for described total mass were found to be both water treatment and species (F(7,62) = 27.08, p < 0.001, alpha = 0.05, adjusted R^2 = 0.7257). Well watered plants tended to have a greater biomass than drought stressed plants. Species such as Salvia leucophylla, Acmispon glaber, and Penstemon centranthifolius tend to have less biomass, while Nasella pulchra, Encelia californica, and Eschscholzia californica have far more biomass growth, and Grindelia camporum has the most biomass growth out of all species. 
 
 
 # Problem 2. Affective visualization (24 points)
