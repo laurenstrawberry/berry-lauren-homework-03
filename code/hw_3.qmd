@@ -1,0 +1,58 @@
+---
+title: "hw_3"
+format: docx
+author: "Lauren Berry"
+---
+
+# Set up
+
+## reading in packages
+
+```{r}
+# general use
+library(tidyverse)
+library(readxl)
+library(here)
+library(janitor)
+
+# visualizing pairs
+library(GGally)
+
+# model selection
+library(MuMIn)
+
+# model predictions
+library(ggeffects)
+
+# model tables
+library(gtsummary)
+library(flextable)
+library(modelsummary)
+
+```
+
+# Problem 1. Multiple linear regression: model selection and construction (52 points)
+
+## a. Make a table or list of all the models from class and the last one you constructed on your own. Write a caption for your table. (8 points)
+
+```{r}
+model_types <- read_xlsx(path = here("data", 
+                                     "hw3-models.xlsx"))
+models <- flextable(model_types)
+models <- add_header_lines(models, values = "Table 1: Model Predictive Variables")
+models <- align(models, align = "center", part = "all")
+models <- bold(models, part = "header")
+models
+```
+
+
+
+
+
+
+
+
+
+
+
+
