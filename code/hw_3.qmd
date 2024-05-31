@@ -45,9 +45,72 @@ models <- bold(models, part = "header")
 models
 ```
 
+## b. Write a 5-6 sentence “statistical methods” section. (8 points)
+
+
+To examine the influence of surface leaf area, water treatment, and species on plant biomass I created a null model and 4 other models to analyze the difference. Model 1 looked at all potential influences, while model 2 only looked at water treatment and surface leaf area. Model 3 looked at surface leaf area and species, and model 4 analyzed water treatment and species. To determine the model that best described biomass, I first visually looked at all of the models and compared them. Then, I ran a model selection test (model.sel), and found that model 4 has the lowest AICc (-156.2).To evaluate linear model assumptions, I visually looked at the 4 plots created by the lm modelling assumption, and confirmed that model 4 meets linear model assumptions, meaning that the variables species and water treatment best describe biomass
+
+## c. Make a visualization of the model predictions with underlying data for your “best” model. (20 points)
+Show and annotate all your code. For full credit:
+
+make the underlying data more transparent than the model predictions
+display species names in full (not as species codes like ENCCAL or ESCCAL)
+display water treatment types in full (not as WW or DS)
+represent well-watered and drought stressed treatments with different colors
+use colors that are not the default ggplot() colors
+facet your plot by species
+remove the legend
+finalize the plot
+Note
+Make sure that the only output is the visualization!
+
+```{r}
+model4 <- lm(total_g ~ water_treatment + species_name,
+             data = drought_exp_clean)
+
+par(mfrow = c(2, 2))
+plot(model4)
+
+```
+
+## d. Write a caption for your visualization. (6 points)
+Include a data citation.
+
+## e. Write a 3-4 sentence results section. (10 points)
+Your answer should be in paragraph form and address the following points:
+
+what predictors “best” described total mass (include model statistics here)?
+on average, what differences did you find between water treatments?
+on average, what differences did you find between species?
 
 
 
+# Problem 2. Affective visualization (24 points)
+a. An affective visualization for my personal data on caffeine and different types of beverage consumption might feature a dynamic, interactive dashboard. This  could use a color-coded timeline, with warm colors like red and orange representing high caffeine intake and cool colors like blue and green indicating lower or no caffeine levels. Instead of a timeline it could be the time of day each is common. Affective visualization could also look like cups of drinks in different sizes based on how often i drink them. 
+
+b.
+
+c. 
+
+d.
+
+# Problem 3. Statistical critique (36 points)
+
+## a. Revisit and summarize (6 points)
+What are the statistical tests the authors are using to address their main research question?
+
+Insert the figure or table you described in Homework 2 here.
+
+
+
+b. Visual clarity (10 points)
+How clearly did the authors visually represent their statistics in figures? For example, are the x- and y-axes in a logical position? Do they show summary statistics (means and SE, for example) and/or model predictions, and if so, do they show the underlying data?
+
+c. Aesthetic clarity (10 points)
+How well did the authors handle “visual clutter”? How would you describe the the data:ink ratio?
+
+d. Recommendations (can be longer than 4 sentences, 10 points)
+What recommendations would you make to make the figure better? What would you take out, add, or change? Provide explanations/justifications for each of your recommendations.
 
 
 

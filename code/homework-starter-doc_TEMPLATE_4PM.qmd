@@ -211,7 +211,14 @@ model3 <- lm(total_g ~ sla + species_name,
 
 plot(model3)
 ```
+```{r}
+model4 <- lm(total_g ~ water_treatment + species_name,
+             data = drought_exp_clean)
 
+par(mfrow = c(2, 2))
+plot(model4)
+
+```
 **look at the diagnostics!!!**
 
 # Model selection
@@ -222,7 +229,8 @@ From the `MuMIn` package
 model.sel(model0,
           model1, 
           model2, 
-          model3)
+          model3,
+          model4)
 ```
 
 Out of the four models we have tried, the best model is the one that includes **all three predictors (specific leaf area, water treatment, and species)**  
@@ -232,8 +240,10 @@ Note that this may change once you fit and compare the other model!
 **look at the diagnostics again!!!!**
 
 
+
 ```{r}
 summary(model1)
+summary(model4)
 ```
 
 What are the reference levels?  
