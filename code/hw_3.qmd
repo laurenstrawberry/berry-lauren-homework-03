@@ -65,11 +65,27 @@ Note
 Make sure that the only output is the visualization!
 
 ```{r}
-model4 <- lm(total_g ~ water_treatment + species_name,
-             data = drought_exp_clean)
+library(ggplot2)
 
-par(mfrow = c(2, 2))
-plot(model4)
+# create model 4
+model4 <- lm(total_g ~ water_treatment + species_name,
+             data = drought_exp_clean) 
+
+# add predicted total weight in grams to existing df
+drought_exp_clean <- drought_exp_clean %>%
+  mutate(predicted_total_g = predict(model4, newdata = drought_exp_clean))
+
+# plot
+ggplot(drought_exp_clean, aes(x = water_treatment, y = total_g)) + # choose data
+  geom_jitter(aes(color = water_treatment), alpha = 0.4) +  # More transparent underlying data
+  geom_line(aes(y = predicted_total_g, group = 1, color = water_treatment), size = 1) +  # Model predictions
+  scale_color_manual(values = c("Well watered" = "darkturquoise", "Drought stressed" = "coral1")) +  # Custom colors
+  facet_wrap(~ species_name) +  # Facet by species
+  theme_minimal() + # simple theme
+  theme(legend.position = "none") +  # Remove legend
+  labs(x = "Water Treatment", y = "Total Biomass Growth (g)", title = "Model Predictions by Species and Water Treatment") +
+  theme(strip.text = element_text(size = 10), # Adjust facet labels
+        plot.title = element_text(hjust = 0.5))  # center the title
 
 ```
 
