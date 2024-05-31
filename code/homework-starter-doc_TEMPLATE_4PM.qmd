@@ -231,7 +231,6 @@ Note that this may change once you fit and compare the other model!
 
 **look at the diagnostics again!!!!**
 
-# Model summary
 
 ```{r}
 summary(model1)
