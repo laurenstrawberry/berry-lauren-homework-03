@@ -67,6 +67,29 @@ Make sure that the only output is the visualization!
 ```{r}
 library(ggplot2)
 
+#load data
+drought_exp <- read_xlsx(path = here("data", 
+                                     "Valliere_etal_EcoApps_Data.xlsx"),
+                         sheet = "First Harvest")
+# cleaning
+drought_exp_clean <- drought_exp %>% 
+  clean_names() %>% # nicer column names
+  mutate(species_name = case_when( # adding column with species scientific names
+    species == "ENCCAL" ~ "Encelia californica", # bush sunflower
+    species == "ESCCAL" ~ "Eschscholzia californica", # California poppy
+    species == "PENCEN" ~ "Penstemon centranthifolius", # Scarlet bugler
+    species == "GRICAM" ~ "Grindelia camporum", # great valley gumweed
+    species == "SALLEU" ~ "Salvia leucophylla", # Purple sage
+    species == "STIPUL" ~ "Nasella pulchra", # Purple needlegrass
+    species == "LOTSCO" ~ "Acmispon glaber" # deerweed
+  )) %>% 
+  relocate(species_name, .after = species) %>% # moving species_name column after species
+  mutate(water_treatment = case_when( # adding column with full treatment names
+    water == "WW" ~ "Well watered",
+    water == "DS" ~ "Drought stressed"
+  )) %>% 
+  relocate(water_treatment, .after = water) # moving water_treatment column after water
+
 # create model 4
 model4 <- lm(total_g ~ water_treatment + species_name,
              data = drought_exp_clean) 
@@ -98,13 +121,42 @@ The best predictors for described total mass were found to be both water treatme
 
 
 # Problem 2. Affective visualization (24 points)
-a. An affective visualization for my personal data on caffeine and different types of beverage consumption might feature a dynamic, interactive dashboard. This  could use a color-coded timeline, with warm colors like red and orange representing high caffeine intake and cool colors like blue and green indicating lower or no caffeine levels. Instead of a timeline it could be the time of day each is common. Affective visualization could also look like cups of drinks in different sizes based on how often i drink them. 
+## a. Describe in words what an affective visualization could look like for your personal data (3-5 sentences). (2 points)
+An affective visualization for my personal data on caffeine and different types of beverage consumption might feature a dynamic, interactive dashboard. This  could use a color-coded timeline, with warm colors like red and orange representing high caffeine intake and cool colors like blue and green indicating lower or no caffeine levels. Instead of a timeline it could be the time of day each is common. Affective visualization could also look like cups of drinks in different sizes based on how often i drink them. 
 
-b.
+## b.
 
-c. 
+## c. 
+```{r}
+# Load excel
+beverages <- read_xlsx(path = here("data", "caffeinatedbeverages.xlsx"))
 
-d.
+# clean df 
+beverages_clean <- beverages %>%  
+  mutate(broad_type = case_when(
+     grepl('green tea', type) ~ 'green tea', # change various green teas to just say green tea
+     grepl('black tea', type) ~ 'black tea',
+     TRUE ~ type
+   )) %>% 
+  mutate(coffee_or_tea = case_when( # create new column tea or coffee
+    grepl('tea', type) ~ "tea",
+    TRUE ~ type
+  ))
+
+# create graph of amounts
+ggplot(beverages_clean, 
+       aes(x = broad_type,
+             fill = type)) +
+  geom_bar() +
+  labs(title = "Beverage Variety",
+       x = "Type of Beverage",
+       y = "Count") +
+  theme_minimal() 
+```
+
+
+## d.
+I am showing the amount of different caffeinated beverages I have consumed throughout the past month and a half. The most caffeinated beverage begins on the left and the amount of caffeine decreases to the right, and the rainbow background is in reference to the quantity getting higher as the drinks are taller. I was influenced by my oma's watercolor paintings, and decided to use watercolor because of this. It was created by first creating a graph with beverage count, sketching a count onto the paper, and then painting. 
 
 # Problem 3. Statistical critique (36 points)
 
