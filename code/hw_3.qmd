@@ -39,7 +39,8 @@ library(modelsummary)
 model_types <- read_xlsx(path = here("data", 
                                      "hw3-models.xlsx"))
 models <- flextable(model_types)
-models <- add_header_lines(models, values = "Table 1: Model Predictive Variables")
+models <- add_header_lines(models, values = "Table 1: Model Predictive Variables
+                           which variables each model includes")
 models <- align(models, align = "center", part = "all")
 models <- bold(models, part = "header")
 models
