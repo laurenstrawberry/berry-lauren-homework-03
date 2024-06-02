@@ -98,18 +98,36 @@ model4 <- lm(total_g ~ water_treatment + species_name,
 model_preds <- ggpredict(model4, 
                          terms = c("water_treatment", 
                                    "species_name"))
-view(model_preds)
+
+colnames(model_preds)[colnames(model_preds) == "group"] <- "species_name"
+
+
+#model_preds <- model_preds %>% # choosing data frame to edit
+#  mutate(species_name = group) # renaming group 
 
 # plot
-ggplot(drought_exp_clean, aes(x = water_treatment, y = total_g)) + # choose data
-  geom_jitter(aes(color = water_treatment), alpha = 0.4) +  # More transparent underlying data
-  geom_line(aes(y = predicted_total_g, group = 1, color = water_treatment), size = 1) +  # Model predictions
+ggplot()+
+  geom_jitter(data = drought_exp_clean, 
+              aes(x = water_treatment, 
+                  y = total_g, 
+                  color = water_treatment,
+                  alpha = 0.4
+                  )) +
+  geom_point(data = model_preds,
+             aes(x = x,
+                 y = predicted
+                 )) +
+  geom_errorbar(data = model_preds,
+                aes(ymin = conf.low,
+                    ymax = conf.high,
+                x = x),
+                width = 0.1)+
   scale_color_manual(values = c("Well watered" = "aquamarine3", "Drought stressed" = "chocolate1")) +  # Custom colors
   facet_wrap(~ species_name) +  # Facet by species
-  theme_minimal() + # simple theme
+  theme_minimal() +  # simple theme
   theme(legend.position = "none") +  # Remove legend
   labs(x = "Water Treatment", y = "Total Biomass Growth (g)") +
-  theme(strip.text = element_text(size = 10)) # Adjust facet labels
+  theme(strip.text = element_text(size = 10))  # Adjust facet labels
 
 ```
 
