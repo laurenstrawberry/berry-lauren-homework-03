@@ -9,6 +9,9 @@ author: "Lauren Berry"
 ## reading in packages
 
 ```{r}
+#| echo: false
+#| warning: false
+#| message: false
 # general use
 library(tidyverse)
 library(readxl)
@@ -118,13 +121,11 @@ ggplot()+
   geom_point(data = model_preds, # choose data for avg dots
              aes(x = x, #choose data
                  y = predicted, #choose data
-                 color = x
-                 )) +
+                )) +
   geom_errorbar(data = model_preds, # add confidence intervals from predicted df
                 aes(ymin = conf.low,
                     ymax = conf.high,
-                x = x,
-                color = x),
+                x = x),
                 width = 0.1)+
   scale_color_manual(values = c("Well watered" = "aquamarine3", "Drought stressed" = "chocolate1")) +  # Custom colors
   facet_wrap(~ species_name) +  # Facet by species
@@ -152,6 +153,7 @@ An affective visualization for my personal data on caffeine and different types 
 
 ## c. 
 ```{r}
+# Create graph for drawing reference
 # Load excel
 beverages <- read_xlsx(path = here("data", "caffeinatedbeverages.xlsx"))
 
@@ -203,7 +205,7 @@ How well did the authors handle “visual clutter”? How would you describe the
 I think the authors handled visual clutter very weak because the amount of ink is minimal compared to the amount of data. However, in cutting out some clutter the graph lacks some in-depth information and perspective. 
 
 ## d. Recommendations (can be longer than 4 sentences, 10 points)
-I believe the figure needs either greater explanation or more data. If the black dots represent outliers then this needs to be adressed in the caption. The significance thresholds using different numbers of "**" are also confusing, and I believe would be better represented by listing the actual significance numbers. 
+I believe the figure needs either greater explanation or more data. If the black dots represent outliers then this needs to be addressed in the caption. The significance thresholds using different numbers of "**" are also confusing, and I believe would be better represented by listing the actual significance numbers. 
 
 
 
