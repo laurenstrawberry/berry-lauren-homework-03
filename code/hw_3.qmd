@@ -100,6 +100,7 @@ model_preds <- ggpredict(model4,
                          terms = c("water_treatment", 
                                    "species_name"))
 
+# change column names for future facet wrap so code doesn't get confusing 
 colnames(model_preds)[colnames(model_preds) == "group"] <- "species_name"
 
 
@@ -108,18 +109,18 @@ colnames(model_preds)[colnames(model_preds) == "group"] <- "species_name"
 
 # plot
 ggplot()+
-  geom_jitter(data = drought_exp_clean, 
-              aes(x = water_treatment, 
-                  y = total_g, 
-                  color = water_treatment,
-                  alpha = 0.3
+  geom_jitter(data = drought_exp_clean, # choose data for jitter poitts
+              aes(x = water_treatment, # treatment x axis
+                  y = total_g, # plot total biomass
+                  color = water_treatment, # color by water treatmet 
+                  alpha = 0.3 #opaque background points
                   )) +
-  geom_point(data = model_preds,
-             aes(x = x,
-                 y = predicted,
+  geom_point(data = model_preds, # choose data for avg dots
+             aes(x = x, #choose data
+                 y = predicted, #choose data
                  color = x
                  )) +
-  geom_errorbar(data = model_preds,
+  geom_errorbar(data = model_preds, # add confidence intervals from predicted df
                 aes(ymin = conf.low,
                     ymax = conf.high,
                 x = x,
