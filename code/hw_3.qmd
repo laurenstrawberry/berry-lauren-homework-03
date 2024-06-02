@@ -138,7 +138,7 @@ ggplot()+
 ## d. Write a caption for your visualization. (6 points)
 Figure 1: Model Predictions by Species and Water Treatment.
 Data from Valliere, Justin; Zhang, Jacqueline; Sharifi, M.; Rundel, Philip (2019). Data from: Can we condition native plants to increase drought tolerance and improve restoration success? [Dataset]. Dryad. https://doi.org/10.5061/dryad.v0861f7
-Points represent biomass (g), of different plant species on separate graphs. Colors represent the water treatment (drought stressed = organge, well watered = blue) these plants experienced. 
+Points represent biomass (g), of different plant species on separate graphs. Colors represent the water treatment (drought stressed = orange, well watered = blue) these plants experienced. 
 
 ## e. Write a 3-4 sentence results section. (10 points)
 The best predictors for described total mass were found to be both water treatment and species (F(7,62) = 27.08, p < 0.001, alpha = 0.05, adjusted R^2 = 0.7257). Well watered plants tended to have a greater biomass than drought stressed plants. Species such as Salvia leucophylla, Acmispon glaber, and Penstemon centranthifolius tend to have less biomass, while Nasella pulchra, Encelia californica, and Eschscholzia californica have far more biomass growth, and Grindelia camporum has the most biomass growth out of all species. 
@@ -159,7 +159,7 @@ beverages <- read_xlsx(path = here("data", "caffeinatedbeverages.xlsx"))
 beverages_clean <- beverages %>%  
   mutate(broad_type = case_when(
      grepl('green tea', type) ~ 'green tea', # change various green teas to just say green tea
-     grepl('black tea', type) ~ 'black tea',
+     grepl('black tea', type) ~ 'black tea', # change various black teas to just say black tea
      TRUE ~ type
    )) %>% 
   mutate(coffee_or_tea = case_when( # create new column tea or coffee
@@ -167,7 +167,7 @@ beverages_clean <- beverages %>%
     TRUE ~ type
   ))
 
-# create graph of amounts
+# create graph of amounts for drawing reference
 ggplot(beverages_clean, 
        aes(x = broad_type,
              fill = type)) +
