@@ -111,16 +111,18 @@ ggplot()+
               aes(x = water_treatment, 
                   y = total_g, 
                   color = water_treatment,
-                  alpha = 0.4
+                  alpha = 0.3
                   )) +
   geom_point(data = model_preds,
              aes(x = x,
-                 y = predicted
+                 y = predicted,
+                 color = x
                  )) +
   geom_errorbar(data = model_preds,
                 aes(ymin = conf.low,
                     ymax = conf.high,
-                x = x),
+                x = x,
+                color = x),
                 width = 0.1)+
   scale_color_manual(values = c("Well watered" = "aquamarine3", "Drought stressed" = "chocolate1")) +  # Custom colors
   facet_wrap(~ species_name) +  # Facet by species
@@ -176,27 +178,30 @@ ggplot(beverages_clean,
 
 
 ## d.
-I am showing the amount of different caffeinated beverages I have consumed throughout the past month and a half. The most caffinated beverage begins on the left and the amount of caffeine decreases to the right, and the rainbow background is in reference to the quantity getting higher as the drinks are taller. I was influenced by my oma's watercolor paintings, and decided to use watercolor because of this. It was created by first creating a graph with beverage count, sketching a count onto the paper, and then painting. 
+I am showing the amount of different caffeinated beverages I have consumed throughout the past month and a half. The most caffeinated beverage begins on the left and the amount of caffeine decreases to the right, and the rainbow background is in reference to the quantity getting higher as the drinks are taller. I was influenced by my oma's watercolor paintings, and decided to use watercolor because of this. It was created by first creating a graph with beverage count, sketching a count onto the paper, and then painting. 
 
 # Problem 3. Statistical critique (36 points)
 
 ## a. Revisit and summarize (6 points)
 What are the statistical tests the authors are using to address their main research question?
 
-Insert the figure or table you described in Homework 2 here.
+Multivariate analysis methods such as FAMD and HCPC were used to categorize farms.
+They also used the Kruskal Wallis test to determine the significance of variabilityand Wilcoxon-Mann-Whitney test.
 
 
-
-b. Visual clarity (10 points)
+## b. Visual clarity (10 points)
 How clearly did the authors visually represent their statistics in figures? For example, are the x- and y-axes in a logical position? Do they show summary statistics (means and SE, for example) and/or model predictions, and if so, do they show the underlying data?
 
-c. Aesthetic clarity (10 points)
+The authors visually represented their statistics in figures fairly well, but the underlying data wasn't clear. There are black dots present in some graphs, but it's unclear what these represent. The legend in the caption was also slightly confusing because it leaves out certain elements of the graph such as the black dots. 
+
+
+## c. Aesthetic clarity (10 points)
 How well did the authors handle “visual clutter”? How would you describe the the data:ink ratio?
 
-d. Recommendations (can be longer than 4 sentences, 10 points)
-What recommendations would you make to make the figure better? What would you take out, add, or change? Provide explanations/justifications for each of your recommendations.
+I think the authors handled visual clutter very weak because the amount of ink is minimal compared to the amount of data. However, in cutting out some clutter the graph lacks some in-depth information and perspective. 
 
-
+## d. Recommendations (can be longer than 4 sentences, 10 points)
+I believe the figure needs either greater explanation or more data. If the black dots represent outliers then this needs to be adressed in the caption. The significance thresholds using different numbers of "**" are also confusing, and I believe would be better represented by listing the actual significance numbers. 
 
 
 
